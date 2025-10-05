@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            .left {
+            
+                background-color: bisque;
+                padding: 20px;
+                float: left;
+                width: 33%; /* the width is default */
+            }
+            .center {
+                text-align: center;
+                background-color: rgb(185, 248, 248);
+                padding: 20px;
+                float: left;
+                width: 33%;
+            }
+            .right {
+                text-align: right;
+                background-color: aqua;
+                padding: 20px;
+                float: left;
+                width: 33%;
+            }
+            @media screen and (max-width: 800px) 
+            {
+                .left, .center, .right {
+                    width: 100%;
+                }
+            }
+
+        
+
+        </style>
+    </head>
+    <body>
+            <p>make Sure you reach the brackpoint at 800px when resizing this frame </p>
+            <div class="left">
+                <p>chaithu</p>
+            </div>
+            <div class="center">
+                <p>company name</p>
+            </div>
+            <div class="right">
+                <p>Menu</p>
+            </div>
+    </body>
+</html>

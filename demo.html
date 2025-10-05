@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width; initial-scale=1.0">
+        <title>My Portfolio</title>
+        <link rel="stylesheet" href="style for myportfolio1.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <!--navigation-->
+        <div class="first-s1" id="frist">
+            <nav class="navbar">
+                <h2 class="logo">My<span class="color">Portfolio</span></h1>
+                <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skil">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="contact">Contact</a></li>
+                </ul>
+            </nav>
+            <!--intro-->
+            <div class="intro">
+                <div class="image"> <img class="pic" src="Images/thumnile/Chaitany.png"></div>
+                <div class="description">
+             <h4>Hello, my name is</p>
+             <h1> Yadla<span class="color"> Chaitanya</span> </h1>
+             <!-- Sentence Animation -->
+            <div class="sentence">
+                <span class="word">I'am</span>
+                <span class="word">A</span>
+                <span class="word">Frontend</span>
+                <span class="word">Developer</span>
+            </div>
+            <div class="social-icons">
+                
+                <span class="icon"><a href="https://www.linkedin.com/in/yadla-chaitanya-5264a2384/"><i class="fa-brands fa-linkedin"></i></a></span>
+                <span class="icon"><a href="#"><i class="fa-brands fa-square-instagram"></i></a></span>
+                <span class="icon"><a href="mailto:yadlachaytu@gmail.com"><i class="fas  fa-envelope"> </i> <span >yadlachaytu@gmail.com</span> </a></span>
+            </div>
+             <script>
+    function runAnimation() {
+      const words = document.querySelectorAll(".word");
+      const icons = document.querySelectorAll(".icon");
+
+      // RESET states
+      words.forEach(w => {
+        w.classList.remove("show", "hide");
+      });
+      icons.forEach(i => {
+        i.classList.remove("show", "hide");
+      });
+
+      // STEP 1: Show words one by one
+      words.forEach((word, index) => {
+        setTimeout(() => {
+          word.classList.add("show");
+        }, index * 1000);
+      });
+
+      // STEP 2: Show icons one by one
+      icons.forEach((icon, index) => {
+        setTimeout(() => {
+          icon.classList.add("show");
+        }, (words.length * 800) + (index * 600));
+      });
+
+      // STEP 3: Reverse (hide words & icons) after everything is shown
+      const reverseStart = (words.length * 1000) + (icons.length * 600) + 2000;
+      
+      // Hide icons first (reverse order)
+      icons.forEach((icon, index) => {
+        setTimeout(() => {
+          icon.classList.remove("show");
+          icon.classList.add("hide");
+        }, reverseStart + (index * 600));
+      });
+
+      // Hide words next (reverse order)
+      words.forEach((word, index) => {
+        setTimeout(() => {
+          word.classList.remove("show");
+          word.classList.add("hide");
+        }, reverseStart + (icons.length * 600) + (index * 1000));
+      });
+
+      // STEP 4: Restart after hide + 5s pause
+      const totalTime = reverseStart + (icons.length * 600) + (words.length * 1000) + 5000;
+      setTimeout(runAnimation, totalTime);
+    }
+
+    runAnimation();
+  </script>
+            </div>
+        </div>
+        </div>
+
+        <!--about-->
+        <div class="about" id="about">
+        <div class="main">
+            <div class="pic2">
+            </div>
+            
+            <div class="about-text">
+                <h2> About <spam class="color"> Me </spam></h2>
+                <p>I am a front-end developer I can provide clean code 
+                    and pixel perfect design. I also make the website more & 
+                    more interactive with web animations. I can provide clean 
+                    code and pixel perfect design I also make the website more 
+                    and more interactive with web animation air responsive design 
+                    make your website accessibility to all user regardless of 
+                    their device</p>
+            </div>
+        </div>
+        </div>
+        
+        <!--projects-->
+        <section class="projects" id="projects">
+            <div class="projects-text">
+                <h2><span class="color"> Amazon Clone</span></h2> <h3>( E-commerce Web Page Design): </h3>
+                <p>Developed an Amazon-inspired e-commerce webpage using HTML & CSS.
+                Implemented a search bar, navigation menu, product cards, and 
+                responsive layout to showcase strong front-end development skills </p>
+            </div>
+
+            <div class="project-image">
+            <img src="Images/thumnile/projects.png">
+            </div>
+        
+        </section>
+        
+        <!--skills-->
+        <div class="skills" id="skil">
+            <div class="skill-photo">
+            </div>
+            <div class="skill-text">
+                <h2>Skills</h2>
+                <p>I have strong front-end development skills in<span class="color"> HTML</span> , 
+                    <span class="color">CSS</span> , and<span class="color"> JavaScript</span>  . Using HTML, I can build clean and 
+                    well-structured web pages, while CSS helps me design responsive, 
+                    modern, and visually appealing layouts with smooth styling and animations. 
+                    With JavaScript, I bring interactivity to websites through DOM manipulation, 
+                    event handling, and dynamic features that enhance user experience. Together, 
+                    these skills enable me to create engaging, user-friendly, and professional web 
+                    applications. </p>
+                    
+                    <div class="icon1">
+                    <i class="fa-brands fa-html5"></i>
+                    <i class="fa-brands fa-css"></i>
+                    <i class="fa-brands fa-js"></i>
+                    </div>
+            </div>
+        </div>
+
+        <!--footer-->
+        <div class="footer">
+          
+            <a href="#frist">Back</a>
+            <hr>
+            <h4> Let's Talk With Me!</h4>
+       
+            
+            <div class=" mail-icon">
+           <i class="fa-solid fa-envelope"></i> yadlachaytu@gmail.com 
+            </div>  
+                <div class="meadia-icon">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-square-instagram"></i>
+                <i class="fa-brands fa-facebook-f"></i>
+                </div>
+            </div>
+        </div>
+
+        
+       
+
+    </body>
+        
+</html>

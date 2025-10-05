@@ -1,0 +1,244 @@
+<!-- LADDER + BOY STYLES & HTML (paste near top of your body or in appropriate place) -->
+<style>
+  /* Ladder container fixed left */
+  .ladder-wrapper {
+    position: fixed;
+    left: 18px;                /* distance from left edge */
+    top: 50%;
+    transform: translateY(-50%) translateX(-10px); /* initial tiny left offset */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    pointer-events: none; /* avoid blocking clicks */
+    transition: transform 0.8s cubic-bezier(.2,.9,.3,1); /* used for page-open slide */
+  }
+
+  /* ladder visual */
+  .ladder {
+    width: 48px;
+    height: 360px; /* visible ladder height; boy will move inside this */
+    background: linear-gradient(180deg, #bfbfbf 0%, #eee 100%);
+    border-radius: 8px;
+    position: relative;
+    padding: 8px 6px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  /* ladder rungs */
+  .ladder .rung {
+    height: 6px;
+    background: linear-gradient(90deg, #6b6b6b, #ddd);
+    border-radius: 4px;
+    margin: 10px 0;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.25) inset;
+  }
+
+  /* boy container that will translate up/down along ladder */
+  .boy {
+    position: absolute;
+    left: 60px; /* boy sits right of ladder */
+    width: 80px;
+    transform: translateY(0) translateX(0);
+    transition: transform 900ms cubic-bezier(.2,.9,.3,1), filter 600ms;
+    will-change: transform;
+    pointer-events: auto;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+  }
+
+  .boy img {
+    width: 80px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 8px 14px rgba(0,0,0,0.45));
+  }
+
+  /* label bubble (optional) */
+  .boy .label {
+    margin-left: 8px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 10px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* small bounce on active */
+  .boy.active {
+    transform: translateY(var(--y)) translateX(6px) scale(1.02);
+    filter: drop-shadow(0 14px 22px rgba(0,0,0,0.55));
+  }
+
+  /* reduce ladder size on small screens */
+  @media (max-width: 900px) {
+    .ladder-wrapper { left: 8px; }
+    .ladder { height: 260px; width: 40px; }
+    .boy { left: 48px; width: 64px; }
+    .boy img { width: 64px; }
+  }
+</style>
+
+<!-- Ladder HTML (place right after body open or anywhere) -->
+<div class="ladder-wrapper" id="ladderWrapper" aria-hidden="true">
+  <div class="ladder" id="ladder">
+    <!-- create many rungs (visual only) -->
+    <div class="rung"></div>
+    <div class="rung"></div>
+    <div class="rung"></div>
+    <div class="rung"></div>
+    <div class="rung"></div>
+    <div class="rung"></div>
+    <div class="rung"></div>
+    <div class="rung"></div>
+    <div class="rung"></div>
+  </div>
+
+  <!-- boy element that will move up/down along ladder -->
+  <div class="boy" id="boy">
+    <img src="Images/thumnile/Sft boy.jpg" alt="cartoon boy" id="boyImg">
+    <div class="label">Software<br>Employee</div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Query sections you want ladder to map to (in order of page)
+    // Adjust selectors to match your layout if needed.
+    const sectionSelectors = [
+      '.intro',   // 0 - Intro (start)
+      '.about',   // 1 - About
+      '.projects',// 2 - Projects (Amazon Clone)
+      '.skills'   // 3 - Skills
+    ];
+
+    const sections = sectionSelectors
+      .map(sel => document.querySelector(sel))
+      .filter(Boolean); // remove not-found
+
+    const boy = document.getElementById('boy');
+    const ladder = document.getElementById('ladder');
+    const wrapper = document.getElementById('ladderWrapper');
+
+    // If there are fewer than 2 sections, do nothing
+    if (!boy || sections.length < 1) return;
+
+    // Compute normalized positions (0% .. 100%) along the ladder for each section
+    // top of ladder corresponds to 8px padding; bottom corresponds to ladder height - padding
+    function computePositions() {
+      const count = sections.length;
+      const positions = [];
+      // If only 1 section -> put boy in middle
+      if (count === 1) {
+        positions.push(50);
+        return positions;
+      }
+      for (let i = 0; i < count; i++) {
+        positions.push( (i/(count-1)) * 100 ); // linear mapping
+      }
+      return positions;
+    }
+
+    let positions = computePositions();
+
+    // Helper: move boy to index
+    function moveToIndex(index) {
+      index = Math.max(0, Math.min(index, positions.length -1));
+      const percent = positions[index];
+      // We want transform translateY in px relative to ladder height.
+      const ladderRect = ladder.getBoundingClientRect();
+      const ladderHeight = ladderRect.height;
+      // compute pixel position so that boy center aligns to that percentage
+      const boyRect = boy.getBoundingClientRect();
+      const boyHeight = boyRect.height;
+      const paddingTop = 8; // same as CSS padding in ladder
+      const yPx = paddingTop + (percent/100) * (ladderHeight - paddingTop*2) - (boyHeight/2);
+
+      // set CSS var for small bounce translate
+      const yCss = `${yPx}px`;
+      // Apply transforms
+      boy.style.setProperty('--y', yCss);
+      // set active class to get slight x-shift + drop-shadow
+      boy.classList.add('active');
+
+      // remove active after transition so it can re-activate next time
+      clearTimeout(boy._activeTimeout);
+      boy._activeTimeout = setTimeout(() => {
+        boy.classList.remove('active');
+      }, 900);
+    }
+
+    // On page load entry animation: move ladder slightly right, then settle
+    window.addEventListener('load', () => {
+      // initial entrance move
+      wrapper.style.transform = 'translateY(-50%) translateX(28px)';
+      setTimeout(() => {
+        wrapper.style.transform = 'translateY(-50%) translateX(18px)';
+      }, 700);
+
+      // move boy to nearest section on load
+      updateOnScroll();
+    });
+
+    // find nearest section index to viewport center
+    function getNearestSectionIndex() {
+      const viewportCenter = window.scrollY + (window.innerHeight / 2);
+      let minDist = Infinity;
+      let nearestIndex = 0;
+      sections.forEach((s, i) => {
+        const rect = s.getBoundingClientRect();
+        const sTop = window.scrollY + rect.top + rect.height/2;
+        const dist = Math.abs(viewportCenter - sTop);
+        if (dist < minDist) {
+          minDist = dist;
+          nearestIndex = i;
+        }
+      });
+      return nearestIndex;
+    }
+
+    // On scroll -> move boy
+    let scrollTimer;
+    function updateOnScroll() {
+      // debounce small
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const index = getNearestSectionIndex();
+        moveToIndex(index);
+      }, 80);
+    }
+
+    window.addEventListener('scroll', updateOnScroll);
+    window.addEventListener('resize', () => {
+      positions = computePositions();
+      updateOnScroll();
+    });
+
+    // Optional: click on ladder rungs to jump to section
+    // make ladder clickable: compute corresponding section for rung clicked
+    ladder.addEventListener('click', (e) => {
+      // find click Y relative to ladder
+      const ladderRect = ladder.getBoundingClientRect();
+      const clickY = e.clientY - ladderRect.top;
+      const ladderH = ladderRect.height;
+      const ratio = clickY / ladderH;
+      // map ratio to nearest section index
+      const idx = Math.round(ratio * (positions.length - 1));
+      const target = sections[idx];
+      if (target) {
+        // smooth scroll to target top
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+
+    // expose for debug if needed
+    window._ladderDebug = { sections, moveToIndex };
+  })();
+</script>

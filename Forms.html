@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <meta charset="UTF-8">
+    <head>
+    <style>
+        .one {
+            color: rgb(93, 195, 135);
+        
+        }
+        .sub:hover {
+           background-color: rgb(93, 195, 135);
+            text-decoration: underline;
+        }
+        .name {
+           width: 40%;
+           height: 35px;
+           border-radius: 10px;
+        }
+        .two , .sub {
+            width: 86%;
+           height: 35px;
+           border-radius: 10px;
+        } .Region, .sub
+        {
+            padding: 0%;
+            margin: 5px;
+        }
+        .name ,.two , .Region  {
+            
+            margin: 2px;
+        }
+       
+       
+    </style>
+
+    </head>
+    <body>
+        <div style="width: 20%; height: 400px; background-color: #293842; border-radius: 20px; text-align: center; ">
+            <h1 style="color: rgb(51, 228, 122); text-align: center; padding-top: 20px;  margin-bottom: 0;"> Registration</h1>
+        <form action="/action-page.php">
+            
+            <input class="name" type="text" id="fname" name="fname" value="" placeholder="First Name">
+            
+            
+            <input class="name"  type="text" id="lname" name="lname" value="" placeholder="Last Name">
+            <br>
+
+            
+            <input class="two"  type="text" id="mail" name="mail" value="" placeholder="Mail ID">
+            <br>
+            
+            <input class="two"  type="text" id="psw" name="psw" value="" placeholder="Create Password">
+            <br>
+           
+            <input class="two"  type="text" id="re" name="re" value="" placeholder=" Confirm-Password" >
+            <br>
+             
+            <label class="one" for="ml">Male</label>
+            <input  type="radio" id="ml" name="ml" value="Male"> 
+            <label class="one"for="Fl">Female</label>
+            <input  type="radio" id="Fl" name="ml" value="">
+            <br>
+            <div class="one">
+            <h3 class="Region">Region</h3>
+            <select>
+                
+                <option>Australia</option>
+                <option>Austria</option>
+                <option>Bangladesh</option>
+                <option>Brazil</option>
+                <option>Canada</option>
+                <option>China</option>
+                <option>HongKong</option>
+                <option>Hungary</option>
+                <option>Italy</option>
+                <option selected>India</option>
+                <option>Japan</option>
+                <option>Kuwait</option>
+
+            </select>
+            </div>
+            
+            <input type="checkbox" id="terms" name="terms" value="">
+            <label class="one" for="terms"><small> Yes, I agree to the <u>Terms of service </u> </small></label>
+            <button class="sub" > Register </button>
+        </form>
+        </div>
+    </body>
+</html>

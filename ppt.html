@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Amazon.in Clone</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial, sans-serif;background:#e3e6e6;}
+
+  /* HEADER */
+  .header {
+    background:#131921;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    padding:8px 10px;
+    gap:15px;
+  }
+  .logo {font-size:22px;font-weight:bold;color:#ff9900;cursor:pointer;}
+  .delivery {font-size:12px;}
+  .delivery span {font-weight:bold; display:block; font-size:14px;}
+
+  /* Search bar */
+  .search-bar {
+    flex:1;
+    display:flex;
+    max-width:700px;
+    height:38px;
+  }
+  .search-bar select,
+  .search-bar input,
+  .search-bar button {
+    border:none;outline:none;
+    font-size:14px;
+  }
+  .search-bar select {background:#f3f3f3;padding:0 8px;border-right:1px solid #ddd;}
+  .search-bar input {flex:1;padding:0 8px;}
+  .search-bar button {
+    background:#febd69;width:45px;cursor:pointer;
+  }
+  .search-bar button:hover{background:#f3a847;}
+
+  /* Right header */
+  .header-right {display:flex;gap:15px;font-size:13px;}
+  .header-right div{cursor:pointer;}
+  .cart{font-weight:bold;}
+
+  /* NAVBAR */
+  .nav {
+    background:#232f3e;
+    color:#fff;
+    display:flex;
+    gap:20px;
+    padding:10px;
+    font-size:14px;
+    overflow-x:auto;
+  }
+
+  /* BANNER */
+  .banner {
+    background:url("Images/Amazon.png") no-repeat center/cover;
+    height:350px;
+  }
+
+  /* PRODUCT SECTIONS */
+  .section {
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+  }
+  .card {
+    background:#fff;
+    padding:15px;
+    border:1px solid #ddd;
+  }
+  .card h2{font-size:18px;margin-bottom:10px;}
+  .card img{width:100%;height:200px;object-fit:cover;margin-bottom:10px;}
+  .card a{color:#007185;font-size:14px;text-decoration:none;}
+  .card a:hover{text-decoration:underline;}
+
+  /* BACK TO TOP */
+  .back-to-top {
+    background:#37475a;
+    color:#fff;
+    text-align:center;
+    padding:15px;
+    font-size:14px;
+    cursor:pointer;
+  }
+
+  /* FOOTER */
+  .footer {
+    background:#232f3e;
+    color:#ddd;
+    padding:30px 20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:20px;
+  }
+  .footer h4{color:#fff;margin-bottom:10px;font-size:15px;}
+  .footer a{display:block;color:#ddd;font-size:13px;margin:4px 0;text-decoration:none;}
+  .footer a:hover{text-decoration:underline;}
+  .footer-bottom {
+    background:#131921;
+    color:#aaa;
+    text-align:center;
+    padding:15px;
+    font-size:12px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">amazon.in</div>
+  <div class="delivery">Deliver to<br><span>India</span></div>
+  <form class="search-bar" action="#">
+    <select><option>All</option><option>Mobiles</option><option>Electronics</option><option>Fashion</option></select>
+    <input type="text" placeholder="Search Amazon.in">
+    <button>🔍</button>
+  </form>
+  <div class="header-right">
+    <div>Hello, Sign in<br><b>Accounts & Lists</b></div>
+    <div>Returns<br><b>& Orders</b></div>
+    <div class="cart">🛒 Cart</div>
+  </div>
+</header>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div>All</div>
+  <div>Amazon Pay</div>
+  <div>Best Sellers</div>
+  <div>Mobiles</div>
+  <div>Customer Service</div>
+  <div>Prime</div>
+  <div>Electronics</div>
+  <div>Fashion</div>
+  <div>Home & Kitchen</div>
+</nav>
+
+<!-- BANNER -->
+<section class="banner"></section>
+
+<!-- PRODUCTS -->
+<section class="section">
+  <div class="card">
+    <h2>Up to 60% off | Electronics</h2>
+    <img src="Images/Ultra Premium TVs | Up to 50% off.jpg" alt="Electronics">
+    <a href="#">See more</a>
+  </div>
+  <div class="card">
+    <h2>Up to 50% off | Fashion</h2>
+    <img src="https://via.placeholder.com/250x200" alt="Fashion">
+    <a href="#">See more</a>
+  </div>
+  <div class="card">
+    <h2>Deals on Mobiles</h2>
+    <img src="https://via.placeholder.com/250x200" alt="Mobiles">
+    <a href="#">Shop now</a>
+  </div>
+  <div class="card">
+    <h2>Home & Kitchen</h2>
+    <img src="https://via.placeholder.com/250x200" alt="Home & Kitchen">
+    <a href="#">Explore more</a>
+  </div>
+</section>
+
+<!-- BACK TO TOP -->
+<div class="back-to-top">Back to top</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer">
+    <div>
+      <h4>Get to Know Us</h4>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Press Releases</a>
+    </div>
+    <div>
+      <h4>Connect with Us</h4>
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+      <a href="#">Instagram</a>
+    </div>
+    <div>
+      <h4>Make Money with Us</h4>
+      <a href="#">Sell on Amazon</a>
+      <a href="#">Advertise Your Products</a>
+      <a href="#">Amazon Pay on Merchants</a>
+    </div>
+    <div>
+      <h4>Let Us Help You</h4>
+      <a href="#">Your Account</a>
+      <a href="#">Returns Centre</a>
+      <a href="#">Help</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2025 Amazon.in Clone – Designed for Practice</div>
+</footer>
+
+</body>
+</html>
